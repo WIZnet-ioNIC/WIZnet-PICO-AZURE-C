@@ -216,8 +216,21 @@ make
 
 Then, copy generated "main.uf2" file into your RP-Pico board. Done!
 
+### 2.2.2. Patch
 
+With Visual Studio Code, each library set as a submodule is automatically patched, but if you do not use Visual Studio Code, each library set as a submodule must be manually patched with the Git commands below in each library directory.
 
+```
+/* Change directory */
+// change to the 'ioLibrary_Driver' library directory.
+cd [user path]/WIZnet-PICO-AZURE-C/libraries/ioLibrary_Driver
+
+// e.g.
+cd D:/RP2040/WIZnet-PICO-AZURE-C/libraries/ioLibrary_Driver
+
+/* Patch */
+git apply --ignore-whitespace ../../patches/01_iolibrary_driver_sntp.patch
+```
 
 ## 2.3. 📝 Sample application results
 
