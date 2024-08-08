@@ -132,7 +132,7 @@ For more details,
 
 ![image](https://user-images.githubusercontent.com/6334864/137454913-db68fbd4-b9ae-4c6f-8dd7-8eef3327851b.png)
 
-- Edit [`RP2040-HAT-AZURE-C/exmaples/sample_certs.c`](examples/sample_certs.c) with generated certificates as upper. For common name, Use "W5100S_EVB_PICO_PROV_X509" used in key generation.
+- Edit [`WIZnet-PICO-AZURE-C/exmaples/sample_certs.c`](examples/sample_certs.c) with generated certificates as upper. For common name, Use "W5100S_EVB_PICO_PROV_X509" used in key generation.
   - `pico_az_CERTIFICATE` and `pico_az_PRIVATE_KEY` use key value from files _(prov_device1.crt, prov_device1.key)_
   - `pico_az_id_scope` use "ID Scope" string from [1.2.1. Create Azure Device Provisioning service](#121-create-azure-device-provisioning-service)
   - `pico_az_COMMON_NAME` use "device ID" from [1.1. Developer PC - Generate Device self-signed certificates](#11-developer-pc---generate-device-self-signed-certificates)
@@ -163,7 +163,7 @@ const char pico_az_PRIVATE_KEY[] =
 
 
 
-In the following [`RP2040-HAT-AZURE-C/exmaples/main.c`](examples/main.c) source file, find the line similar to this and replace it as you want:
+In the following [`WIZnet-PICO-AZURE-C/exmaples/main.c`](examples/main.c) source file, find the line similar to this and replace it as you want:
 
 ```C
 (...)
@@ -200,7 +200,7 @@ static wiz_NetInfo g_net_info =
 Run `make` command
 
 ```
-(PWD) RP2040-HAT-AZURE-C/build/examples
+(PWD) WIZnet-PICO-AZURE-C/build/examples
 $ make
 [ 12%] Built target AZURE_SDK_FILES
 [ 12%] Built target bs2_default
@@ -244,7 +244,7 @@ Open "COM" port to see debug code
 ## 2.1. Copy main.uf2 file into your Pico board
 
 ```
-(PWD) RP2040-HAT-AZURE-C/build/examples
+(PWD) WIZnet-PICO-AZURE-C/build/examples
 $ cp main.uf2 /f/
 ```
 

@@ -43,7 +43,7 @@ In Azure portal, you need to create a device and get the connection string infor
 
 ### 1.2.1. SDK setting
 
-In the following [`RP2040-HAT-AZURE-C/exmaples/main.c`](examples/main.c) source file, find the line similar to this and replace it as you want:
+In the following [`WIZnet-PICO-AZURE-C/exmaples/main.c`](examples/main.c) source file, find the line similar to this and replace it as you want:
 
 ```C
 (...)
@@ -73,7 +73,7 @@ static wiz_NetInfo g_net_info =
 };
 ```
 
-Edit the [`RP2040-HAT-AZURE-C/exmaples/sample_certs.c`](examples/sample_certs.c) entering the proper connection string and key value from the Azure Portal:
+Edit the [`WIZnet-PICO-AZURE-C/exmaples/sample_certs.c`](examples/sample_certs.c) entering the proper connection string and key value from the Azure Portal:
 
 ```C
 /* Paste in the your iothub connection string  */
@@ -87,7 +87,7 @@ const char pico_az_connectionString[] = "[device connection string]";
 Run `make` command
 
 ```
-(PWD) RP2040-HAT-AZURE-C/build/examples
+(PWD) WIZnet-PICO-AZURE-C/build/examples
 $ make
 [ 12%] Built target AZURE_SDK_FILES
 [ 12%] Built target bs2_default
@@ -159,7 +159,7 @@ To see the message from your IoT Device, you need to make a "Azure IoT Explorer"
 ## 2.1. Copy main.uf2 file into your W5x00-EVB-Pico
 
 ```
-(PWD) RP2040-HAT-AZURE-C/build/examples
+(PWD) WIZnet-PICO-AZURE-C/build/examples
 $ cp main.uf2 /f/
 ```
 

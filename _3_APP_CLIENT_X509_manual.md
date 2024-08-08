@@ -147,7 +147,7 @@ $
 - Get the key value from files _(device1.crt, device1.key)_ as below:
 ![image](https://user-images.githubusercontent.com/6334864/137420283-440321ad-6656-4cff-9153-a26188df6d2c.png)
 
-- Edit [`RP2040-HAT-AZURE-C/exmaples/sample_certs.c`](examples/sample_certs.c) with generated certificates as upper. Connection string for this example is `"HostName=twarelabhub.azure-devices.net;DeviceId=W5100S_EVB_PICO_X509;x509=true"`
+- Edit [`WIZnet-PICO-AZURE-C/exmaples/sample_certs.c`](examples/sample_certs.c) with generated certificates as upper. Connection string for this example is `"HostName=twarelabhub.azure-devices.net;DeviceId=W5100S_EVB_PICO_X509;x509=true"`
 
 ```C
 #include "azure_samples.h"
@@ -178,7 +178,7 @@ const char pico_az_x509privatekey[] =
 
 - Select example in main.c
 
-In the following [`RP2040-HAT-AZURE-C/exmaples/main.c`](examples/main.c) source file, find the line similar to this and replace it as you want:
+In the following [`WIZnet-PICO-AZURE-C/exmaples/main.c`](examples/main.c) source file, find the line similar to this and replace it as you want:
 
 ```C
 (...)
@@ -215,7 +215,7 @@ static wiz_NetInfo g_net_info =
 Run `make` command
 
 ```
-(PWD) RP2040-HAT-AZURE-C/build/examples
+(PWD) WIZnet-PICO-AZURE-C/build/examples
 $ make
 [ 12%] Built target AZURE_SDK_FILES
 [ 12%] Built target bs2_default
@@ -293,7 +293,7 @@ Wait for incoming messages
 ## 2.1. Copy main.uf2 file into your Pico board
 
 ```
-(PWD) RP2040-HAT-AZURE-C/build/examples
+(PWD) WIZnet-PICO-AZURE-C/build/examples
 $ cp main.uf2 /f/
 ```
 
