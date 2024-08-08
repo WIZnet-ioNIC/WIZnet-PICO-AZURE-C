@@ -7,12 +7,11 @@ if(NOT DEFINED PICO_SDK_PATH)
     message(STATUS "PICO_SDK_PATH = ${PICO_SDK_PATH}")
 endif()
 
-include(rp2040_hat_azure_c-patch.cmake)
 include(pico_sdk_import.cmake)
-include(rp2040_hat_azure_c_sdk_version.cmake)
+include(wiznet_pico_azure_c_sdk_version.cmake)
 
 # Set project name
-set(PROJECT_NAME RP2040-HAT-AZURE-C)
+set(PROJECT_NAME WIZNET-PICO-AZURE-C)
 
 # Set project informations
 project(${PROJECT_NAME} C CXX ASM)
@@ -23,15 +22,30 @@ set(CMAKE_CXX_STANDARD 17)
 # Initialize the SDK
 pico_sdk_init()
 
-# Set ethernet chip
-set(WIZNET_CHIP W5100S)
+# Set board
+#set(BOARD_NAME WIZnet_Ethernet_HAT)
+#set(BOARD_NAME W5100S_EVB_PICO)
+#set(BOARD_NAME W5500_EVB_PICO)
+set(BOARD_NAME W55RP20_EVB_PICO)
 
-if(${WIZNET_CHIP} STREQUAL W5100S)
+if(${BOARD_NAME} STREQUAL WIZnet_Ethernet_HAT)
+    set(WIZNET_CHIP W5100S)
     add_definitions(-D_WIZCHIP_=W5100S)
-elseif(${WIZNET_CHIP} STREQUAL W5500)
+    add_definitions(-DDEVICE_BOARD_NAME=WIZnet_Ethernet_HAT)
+elseif(${BOARD_NAME} STREQUAL W5100S_EVB_PICO)
+    set(WIZNET_CHIP W5100S)
+    add_definitions(-D_WIZCHIP_=W5100S)
+    add_definitions(-DDEVICE_BOARD_NAME=W5100S_EVB_PICO)
+elseif(${BOARD_NAME} STREQUAL W5500_EVB_PICO)
+    set(WIZNET_CHIP W5500)
     add_definitions(-D_WIZCHIP_=W5500)
-else()
-    message(FATAL_ERROR "WIZNET_CHIP is wrong = ${WIZNET_CHIP}")
+    add_definitions(-DDEVICE_BOARD_NAME=W5500_EVB_PICO)
+elseif(${BOARD_NAME} STREQUAL W55RP20_EVB_PICO)
+    set(WIZNET_CHIP W5500)
+    add_definitions(-D_WIZCHIP_=W5500)
+    add_definitions(-DDEVICE_BOARD_NAME=W55RP20_EVB_PICO)
+else() 
+    message(FATAL_ERROR "BOARD_NAME is wrong = ${BOARD_NAME}")
 endif()
 
 message(STATUS "WIZNET_CHIP = ${WIZNET_CHIP}")
