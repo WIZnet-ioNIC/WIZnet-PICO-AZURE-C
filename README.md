@@ -1,7 +1,7 @@
 <!-- omit in toc -->
 # Raspberry Pi Pico W5x00 Azure IoT SDK Examples
 
-RP2040 - W5100S or W5500 network examples - Azure IoT Cloud functions, Azure IoT SDK, Azure IoT device client, ...
+RP2040 or RP2350 - W5100S, W5500 or W55RP20 network examples - Azure IoT Cloud functions, Azure IoT SDK, Azure IoT device client, ...
 
 - [1. 🎯 Azure IoT SDK examples](#1--azure-iot-sdk-examples)
   - [1.1. 3rd party SDKs & libraries](#11-3rd-party-sdks--libraries)
@@ -78,6 +78,8 @@ First, set the ethernet chip according to the evaluation board used in the follo
 - W5100S-EVB-Pico
 - W5500-EVB-Pico
 - W55RP20-EVB-Pico
+- W5100S-EVB-Pico2
+- W5500-EVB-Pico2
 
 For example, when using WIZnet Ethernet HAT :
 
@@ -91,6 +93,27 @@ When using W5500-EVB-Pico:
 ```bash
 # Set board
 set(BOARD_NAME W5500_EVB_PICO)
+```
+
+When using W55RP20-EVB-Pico:
+
+```bash
+# Set board
+set(BOARD_NAME W55RP20_EVB_PICO)
+```
+
+When using W5500-EVB-Pico2:
+
+```bash
+# Set board
+set(BOARD_NAME W5500_EVB_PICO2)
+```
+
+When using W5100S-EVB-Pico2:
+
+```bash
+# Set board
+set(BOARD_NAME W5100S_EVB_PICO2)
 ```
 
 And find the line similar to this and replace it as your environment:
