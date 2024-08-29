@@ -255,6 +255,14 @@ cd D:/RP2040/WIZnet-PICO-AZURE-C/libraries/ioLibrary_Driver
 git apply --ignore-whitespace ../../patches/01_iolibrary_driver_sntp.patch
 ```
 
+> ※ If the board pauses when rebooting using W55RP20-EVB-Pico, patch it as follows.
+>
+> ```cpp
+> // Patch
+> cd D:/RP2040/WIZnet-PICO-AZURE-C
+> git apply ./patches/0001_pico_sdk_clocks.patch
+> ```
+
 ## 2.3. 📝 Sample application results
 
 
