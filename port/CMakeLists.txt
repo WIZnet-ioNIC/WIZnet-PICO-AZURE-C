@@ -1,17 +1,24 @@
 # ioLibrary_Driver
+
 add_library(IOLIBRARY_FILES STATIC)
 
 target_sources(IOLIBRARY_FILES PUBLIC
-        ${PORT_DIR}/ioLibrary_Driver/src/w5x00_spi.c
-        ${PORT_DIR}/ioLibrary_Driver/src/w5x00_gpio_irq.c
+        ${PORT_DIR}/ioLibrary_Driver/src/wizchip_spi.c
+        ${PORT_DIR}/ioLibrary_Driver/src/wizchip_gpio_irq.c
         )
 
-if(${BOARD_NAME} STREQUAL W55RP20_EVB_PICO)
-pico_generate_pio_header(IOLIBRARY_FILES ${PORT_DIR}/ioLibrary_Driver/src/wiznet_spi_pio.pio)
+if(${BOARD_NAME} STREQUAL W55RP20_EVB_PICO OR ${WIZNET_CHIP} STREQUAL W6300)
+        pico_generate_pio_header(IOLIBRARY_FILES ${PORT_DIR}/ioLibrary_Driver/src/wizchip_qspi_pio.pio)
 
 target_sources(IOLIBRARY_FILES PUBLIC 
-        ${PORT_DIR}/ioLibrary_Driver/src/wiznet_spi_pio.c
-        )
+        ${PORT_DIR}/ioLibrary_Driver/src/wizchip_qspi_pio.c
+)
+
+target_include_directories(IOLIBRARY_FILES PUBLIC
+        ${WIZNET_DIR}/Ethernet
+        ${PORT_DIR}/ioLibrary_Driver/inc
+        ${PORT_DIR}
+)
 endif()
         
 target_include_directories(IOLIBRARY_FILES PUBLIC
@@ -42,6 +49,23 @@ target_include_directories(TIMER_FILES PUBLIC
 target_link_libraries(TIMER_FILES PRIVATE
         pico_stdlib      
         )
+
+
+
+# port_common
+add_library(PORT_COMMON_FILES STATIC)
+
+target_include_directories(PORT_COMMON_FILES PUBLIC
+${PORT_DIR}
+)
+
+target_link_libraries(PORT_COMMON_FILES PUBLIC
+pico_stdlib
+hardware_clocks
+hardware_spi
+hardware_dma
+hardware_pio
+)
 
 # azure-iot-sdk-c
 add_library(AZURE_SDK_PORT_FILES STATIC)

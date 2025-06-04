@@ -16,7 +16,7 @@
 
 #include "wizchip_conf.h"
 #include "socket.h"
-#include "w5x00_gpio_irq.h"
+#include "wizchip_gpio_irq.h"
 
 /**
  * ----------------------------------------------------------------------------------------------------
