@@ -31,7 +31,7 @@ This project supports the following boards:
 - **[W5500-EVB-Pico][link-w5500-evb-pico]**
 - **[W55RP20-EVB-Pico][link-w55rp20-evb-pico]**
 - **[W6100-EVB-Pico][link-w6100-evb-pico]**
-- **W6300-EVB-Pico**
+- **[W6300-EVB-Pico][link-w6300-evb-pico]**
 - **[W5100S-EVB-Pico2][link-w5100s-evb-pico2]**
 - **[W5500-EVB-Pico2][link-w5500-evb-pico2]**
 - **[W6100-EVB-Pico2][link-w6100-evb-pico2]**
@@ -365,6 +365,7 @@ Link
 [link-w5100s-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico
 [link-w5500-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W5500/w5500-evb-pico
 [link-w6100-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W6100/w6100-evb-pico
+[link-w6300-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W6300/w6300-evb-pico
 [link-CAN]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/can
 [link-dhcp_dns]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/dhcp_dns
 [link-ftp]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/ftp
