@@ -22,8 +22,43 @@ RP2040 or RP2350 - W5100S, W5500 or W55RP20 network examples - Azure IoT Cloud f
 
 ------
 
+## Development Environment Configuration
+
+This project supports the following boards:
+
+- **[WIZnet Ethernet HAT][link-wiznet_ethernet_hat]**
+- **[W5100S-EVB-Pico][link-w5100s-evb-pico]**
+- **[W5500-EVB-Pico][link-w5500-evb-pico]**
+- **[W55RP20-EVB-Pico][link-w55rp20-evb-pico]**
+- **[W6100-EVB-Pico][link-w6100-evb-pico]**
+- **W6300-EVB-Pico**
+- **[W5100S-EVB-Pico2][link-w5100s-evb-pico2]**
+- **[W5500-EVB-Pico2][link-w5500-evb-pico2]**
+- **[W6100-EVB-Pico2][link-w6100-evb-pico2]**
+- **[W6300-EVB-Pico2][link-w6300-evb-pico2]**
 
 
+> The development environment was tested on **Windows** using **Visual Studio Code**. Please refer to the official Raspberry Pi Pico SDK guide for setup instructions.
+
+
+
+## Hardware Requirements
+
+The project is compatible with the following WIZnet boards:
+
+| Board/Module Name | MCU | Ethernet Chip | Interface | Socket # | TX/RX Buffer | Notes |
+|:---|:---|:---|:---|:---|:---|:---|
+| WIZnet Ethernet HAT |  | W5100S | SPI | 4 | 16KB | RP Pico-compatible |
+| W5100S-EVB-Pico | RP2040 | W5100S | SPI | 4 | 16KB |  |
+| W5500-EVB-Pico | RP2040 | W5500 | SPI | 8 | 32KB |  |
+| W55RP20-EVB-Pico | RP2040 | W5500 | SPI (PIO) | 8 | 32KB | SiP: RP2040 + W5500 |
+| W6100-EVB-Pico | RP2040 | W6100 | SPI | 8 | 32KB | Supports IPv4/IPv6 |
+| W6300-EVB-Pico | RP2040 | W6300 | QSPI (PIO) | 8 | 64KB | Supports IPv4/IPv6 |
+| W5100S-EVB-Pico2 | RP2350 | W5100S | SPI | 4 | 16KB |  |
+| W5500-EVB-Pico2 | RP2350 | W5500 | SPI | 8 | 32KB |  |
+| W6100-EVB-Pico2 | RP2350 | W6100 | SPI | 8 | 32KB | Supports IPv4/IPv6 |
+| W6300-EVB-Pico2 | RP2350 | W6300 | QSPI (PIO) | 8 | 64KB | Supports IPv4/IPv6 |
+-----
 # 1. 🎯 Azure IoT SDK examples
 
 | Application         | Description                                                                          |
@@ -78,43 +113,63 @@ First, set the ethernet chip according to the evaluation board used in the follo
 - W5100S-EVB-Pico
 - W5500-EVB-Pico
 - W55RP20-EVB-Pico
+- W6100-EVB-Pico
+- W6300-EVB-Pico
 - W5100S-EVB-Pico2
 - W5500-EVB-Pico2
+- W6100-EVB-Pico2
+- W6300-EVB-Pico2
 
 For example, when using WIZnet Ethernet HAT :
 
 ```bash
 # Set board
 set(BOARD_NAME WIZnet_Ethernet_HAT)
+# set(BOARD_NAME W5100S_EVB_PICO)
+# set(BOARD_NAME W5500_EVB_PICO)
+# set(BOARD_NAME W55RP20_EVB_PICO)
+# set(BOARD_NAME W6100_EVB_PICO)
+# set(BOARD_NAME W6300_EVB_PICO)
+# set(BOARD_NAME W5100S_EVB_PICO2)
+# set(BOARD_NAME W5500_EVB_PICO2)
+# set(BOARD_NAME W6100_EVB_PICO2)
+# set(BOARD_NAME W6300_EVB_PICO2)
 ```
 
-When using W5500-EVB-Pico:
+When using W6300-EVB-Pico:
 
 ```bash
 # Set board
-set(BOARD_NAME W5500_EVB_PICO)
+# set(BOARD_NAME WIZnet_Ethernet_HAT)
+# set(BOARD_NAME W5100S_EVB_PICO)
+# set(BOARD_NAME W5500_EVB_PICO)
+# set(BOARD_NAME W55RP20_EVB_PICO)
+# set(BOARD_NAME W6100_EVB_PICO)
+set(BOARD_NAME W6300_EVB_PICO)
+# set(BOARD_NAME W5100S_EVB_PICO2)
+# set(BOARD_NAME W5500_EVB_PICO2)
+# set(BOARD_NAME W6100_EVB_PICO2)
+# set(BOARD_NAME W6300_EVB_PICO2)
+```
+ 
+You can easily configure **SPI clock speed of the WIZnet chip** in the CMakeLists.txt file. Enter your desired clock speed in the code below and build.
+
+```cpp
+# Set WIZchip Clock Speed
+add_definitions(-D_WIZCHIP_SPI_SCLK_SPEED=40) # SPEED MHz
 ```
 
-When using W55RP20-EVB-Pico:
+**When using W6300**, **you can configure the QSPI mode** by modifying the board selection parameter.
 
-```bash
-# Set board
-set(BOARD_NAME W55RP20_EVB_PICO)
+For example, when using **QSPI QUAD MODE**:
+
+```cpp
+# Set QSPI MODE for W6300
+    add_definitions(-D_WIZCHIP_QSPI_MODE_=QSPI_QUAD_MODE) # QSPI_QUAD_MODE
+    # add_definitions(-D_WIZCHIP_QSPI_MODE_=QSPI_DUAL_MODE) # QSPI_DUAL_MODE 
+    # add_definitions(-D_WIZCHIP_QSPI_MODE_=QSPI_SINGLE_MODE) # QSPI_SINGLE_MODE 
 ```
 
-When using W5500-EVB-Pico2:
-
-```bash
-# Set board
-set(BOARD_NAME W5500_EVB_PICO2)
-```
-
-When using W5100S-EVB-Pico2:
-
-```bash
-# Set board
-set(BOARD_NAME W5100S_EVB_PICO2)
-```
 
 And find the line similar to this and replace it as your environment:
 
@@ -288,3 +343,66 @@ git apply --ignore-whitespace ../../patches/01_iolibrary_driver_sntp.patch
 ### 2.3.4. 🚢 'prov_dev_client_ll_sample' application result
 
 📑 [Let's see this doc for prov_dev_client_ll_sample application](_4_APP_PROV_X509_manual.md)
+
+
+
+
+<!--
+Link
+-->
+
+[link-getting_started_with_raspberry_pi_pico]: https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf
+[link-rp2040]: https://www.raspberrypi.org/products/rp2040/
+[link-rp2350]: https://www.raspberrypi.com/products/rp2350/
+[link-w5100s]: https://docs.wiznet.io/Product/iEthernet/W5100S/overview
+[link-w5500]: https://docs.wiznet.io/Product/iEthernet/W5500/overview
+[link-w6100]: https://docs.wiznet.io/Product/iEthernet/W6100/overview
+[link-w6300]: https://docs.wiznet.io/Product/iEthernet/W6300/overview
+[link-wiznet_ethernet_chips]: https://docs.wiznet.io/Product/iEthernet#product-family
+[link-w55rp20-evb-pico]: https://docs.wiznet.io/Product/ioNIC/W55RP20/w55rp20-evb-pico
+[link-raspberry_pi_pico]: https://www.raspberrypi.com/products/raspberry-pi-pico/
+[link-wiznet_ethernet_hat]: https://docs.wiznet.io/Product/Open-Source-Hardware/wiznet_ethernet_hat
+[link-w5100s-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico
+[link-w5500-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W5500/w5500-evb-pico
+[link-w6100-evb-pico]: https://docs.wiznet.io/Product/iEthernet/W6100/w6100-evb-pico
+[link-CAN]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/can
+[link-dhcp_dns]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/dhcp_dns
+[link-ftp]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/ftp
+[link-ftp_client]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/ftp/client
+[link-ftp_server]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/ftp/server
+[link-http]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/http
+[link-http_server]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/http/server
+[link-loopback]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/loopback
+[link-mqtt]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/mqtt
+[link-mqtt_publish]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/mqtt/publish
+[link-mqtt_publish_subscribe]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/mqtt/publish_subscribe
+[link-mqtt_subscribe]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/mqtt/subscribe
+[link-netbios]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/netbios
+[link-network_install]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/network_install
+[link-pppoe]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/pppoe
+[link-sntp]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/sntp
+[link-tcp_client_over_ssl]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/tcp_client_over_ssl
+[link-tcp_server_multi_socket]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/tcp_server_multi_socket
+[link-tftp]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/tftp
+[link-UDP]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/udp
+[link-UDP_multicast]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/udp_multicast
+[link-UDP_multicast_receiver]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/udp_multicast/udp_multicast_receiver
+[link-upnp]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/examples/upnp
+[link-iolibrary_driver]: https://github.com/Wiznet/ioLibrary_Driver
+[link-mbedtls]: https://github.com/ARMmbed/mbedtls
+[link-pico_sdk]: https://github.com/raspberrypi/pico-sdk
+[link-port_iolibrary_driver]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/port/ioLibrary_Driver
+[link-port_mbedtls]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/port/mbedtls
+[link-port_timer]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/main/port/timer
+[link-wiznet_pico_c_1_0_0_version]: https://github.com/WIZnet-ioNIC/WIZnet-PICO-C/tree/1.0.0
+[link-w5100s-evb-pico2]: https://docs.wiznet.io/Product/iEthernet/W5100S/w5100s-evb-pico2
+[link-w5500-evb-pico2]: https://docs.wiznet.io/Product/iEthernet/W5500/w5500-evb-pico2
+[link-w6100-evb-pico2]: https://docs.wiznet.io/Product/iEthernet/W6100/w6100-evb-pico2
+[link-w6300-evb-pico2]: https://docs.wiznet.io/Product/iEthernet/W6300/w6300-evb-pico2
+
+[link-w5100s]: https://docs.wiznet.io/Product/iEthernet/W5100S/overview
+[link-w5500]: https://docs.wiznet.io/Product/iEthernet/W5500/overview
+[link-w6100]: https://docs.wiznet.io/Product/iEthernet/W6100
+[link-w6300]: https://docs.wiznet.io/Product/iEthernet/W6300
+
+
