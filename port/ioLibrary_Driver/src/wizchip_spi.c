@@ -89,11 +89,17 @@ static inline void wizchip_deselect(void)
 
 }
 
-void wizchip_reset()
+void wizchip_reset()Add commentMore actions
 {
     gpio_init(PIN_RST);
+
+#if defined(USE_PIO) && (_WIZCHIP_ == W5500)
+    gpio_pull_up(PIN_RST);
     gpio_set_dir(PIN_RST, GPIO_OUT);
-    
+    sleep_ms(5);
+#else
+    gpio_set_dir(PIN_RST, GPIO_OUT);
+#endif
     gpio_put(PIN_RST, 0);
     sleep_ms(100);
 
