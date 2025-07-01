@@ -89,7 +89,7 @@ static inline void wizchip_deselect(void)
 
 }
 
-void wizchip_reset()Add commentMore actions
+void wizchip_reset()
 {
     gpio_init(PIN_RST);
 
